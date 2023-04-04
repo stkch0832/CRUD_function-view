@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}プロフィール{% endblock %}
+
+{% block content %}
+
+<div class="w-50 border mx-auto my-5 p-5">
+    <h2 class="text-center mb-5">{{ profile_data.username }}のプロフィール</h2>
+
+    <div class="container">
+        {% if profile_data.image %}
+        <img class="" src="{{ profile_data.image.url }}" alt="サムネイル画像">
+        {% endif %}
+        <p>ユーザー名: {{ profile_data.username }}</p>
+        <p>生年月日: {{ profile_data.birth }}</p>
+        <p>年齢: {{ profile_data.age }}</p>
+        <p>自己紹介コメント: </p>
+        <p> {{ profile_data.introduction | linebreaksbr }}</p>
+        <div class="">
+            <a href="{% url 'accounts:profile_edit' profile_data.pk %}" class="btn btn-primary ms-auto">編集</a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

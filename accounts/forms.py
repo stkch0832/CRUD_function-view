@@ -1,3 +1,4 @@
+from .models import Profile
 from django import forms
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
@@ -5,14 +6,7 @@ from django.core.exceptions import ValidationError
 User = get_user_model()
 
 class UserCreationForm(forms.ModelForm):
-    # password = forms.CharField(
-    #     label='パスワード',
-    #     widget=forms.PasswordInput(
-    #         attrs={
-    #             'class': 'form-control'
-    #         }
-    #     )
-    # )
+
     confirm_password = forms.CharField(
         label='パスワード（確認用）',
         widget=forms.PasswordInput(
@@ -75,3 +69,46 @@ class UserLoginForm(forms.Form):
             }
         )
     )
+
+
+class UserProfileForm(forms.ModelForm):
+
+    username = forms.CharField(
+        max_length=30,
+        label='ユーザー名',
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+        })
+    )
+    introduction = forms.CharField(
+        max_length=255,
+        label='自己PR',
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'rows': 6,
+            'cols': 50,
+        })
+    )
+    birth = forms.DateField(
+        label='生年月日',
+        widget=forms.NumberInput(attrs={
+            'class': 'form-control',
+            'type': 'date',
+        })
+    )
+    image = forms.ImageField(
+        label='サムネイル画像',
+        required=False,
+        widget=forms.ClearableFileInput(attrs={
+            'class': 'form-control',
+            })
+    )
+
+    class Meta:
+        model = Profile
+        fields = (
+            'username',
+            'introduction',
+            'birth',
+            'image',
+        )

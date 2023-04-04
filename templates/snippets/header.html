@@ -4,7 +4,13 @@
         <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href=""></a>
+                <a class="nav-link" href="{% url 'accounts:profile_detail' pk=user.pk %}">
+                    {% if user.profile.username %}
+                    {{ user.profile.username }}
+                    {% else %}
+                    {{ 'ユーザー' }}
+                    {% endif %}
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="">About</a>
