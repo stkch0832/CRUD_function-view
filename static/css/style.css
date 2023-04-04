@@ -1,0 +1,19 @@
+@charset "UTF-8";
+・{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #5bb0f2;
+    display: flex;
+    flex-flow: column;
+}
+
+main {
+    background: #FFFFFF;
+    flex: 1;
+}

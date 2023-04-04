@@ -1,0 +1,41 @@
+{% load static %}
+{% load bootstrap5 %}
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% bootstrap_css %}
+    {% block extra_css %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body class="">
+    <header>
+        {% include 'snippets/header.html' %}
+    </header>
+
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == "success" %}
+                <div class="alert alert-success text-center m-0 p-3">
+                    {{ message.message }}
+                </div>
+            {% elif message.tags == "warning" %}
+                <div class="alert alert-danger text-center m-0 p-3">
+                    {{ message.message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+
+</html>
